@@ -1,6 +1,12 @@
 <template>
   <Head>
-    <Title>Ges</Title>
+    <Link
+      rel="icon"
+      type="image/png"
+      href="https://www.galileo.edu/wp-content/themes/galileo-theme/img/favicon.ico"
+    />
+
+    <Title> GES </Title>
   </Head>
 
   <NuxtPage />
