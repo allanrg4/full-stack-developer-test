@@ -5,6 +5,6 @@ from assignments.views import AssignmentViewSet
 
 router = DefaultRouter()
 
-router.register('', AssignmentViewSet, basename='assignments')
+router.register('assignments', AssignmentViewSet, basename='assignments')
 
 urlpatterns = router.urls

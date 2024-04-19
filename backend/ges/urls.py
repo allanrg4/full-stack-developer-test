@@ -17,7 +17,8 @@ urlpatterns = [
         path('auth/token/refresh/', TokenRefreshView.as_view()),
         path('auth/token/verify/', TokenVerifyView.as_view()),
 
-        path('assignments/', include('assignments.urls')),
+        path('', include('assignments.urls')),
+        path('', include('meetings.urls')),
 
         path('schema/', SpectacularAPIView.as_view(), name='schema'),
         path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
