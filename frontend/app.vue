@@ -9,5 +9,7 @@
     <Title> GES </Title>
   </Head>
 
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

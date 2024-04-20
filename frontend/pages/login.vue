@@ -21,7 +21,7 @@ async function onSubmit(values: any) {
 </script>
 
 <template>
-  <main class="flex h-screen w-screen items-center justify-center">
+  <main class="flex h-screen w-screen items-center justify-center bg-base-200">
     <div class="card w-[25vw] bg-white pt-10 shadow-xl">
       <figure>
         <img
