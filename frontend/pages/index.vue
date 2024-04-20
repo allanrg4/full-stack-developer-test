@@ -1,6 +1,23 @@
 <script lang="ts" setup>
+import type { Student } from '@/entities/Student'
+
+import * as service from '@/services/StudentService'
+
+const students = ref<Student[]>([])
+
 const day = ref<number>()
 const session = ref<number>()
+
+const choices = computed(() =>
+  students.value.map((i) => ({
+    label: `${i.firstName} ${i.lastName}`,
+    value: i.id,
+  }))
+)
+
+onBeforeMount(async () => {
+  students.value = await service.all()
+})
 
 definePageMeta({
   middleware: 'auth',
@@ -75,7 +92,7 @@ definePageMeta({
               name="student"
               label="Asignar Estudiante"
               placeholder="Ingrese el estudiante ha asignar"
-              :options="['Estudiante 1', 'Estudiante 2', 'Estudiante 3']"
+              :options="choices"
               validation="required"
             />
 

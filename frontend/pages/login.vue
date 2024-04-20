@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import * as authService from '@/services/auth'
+import * as authService from '@/services/AuthService'
 
 const auth = useAuthStore()
 
