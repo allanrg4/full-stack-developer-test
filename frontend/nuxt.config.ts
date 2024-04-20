@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
-  modules: ['@formkit/nuxt'],
+  modules: ['@formkit/nuxt', '@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -12,5 +12,10 @@ export default defineNuxtConfig({
   },
   formkit: {
     autoImport: true,
+  },
+  runtimeConfig: {
+    public: {
+      api: String(process.env.API_URL),
+    },
   },
 })

@@ -1,5 +1,23 @@
 <script lang="ts" setup>
+import * as authService from '@/services/auth'
+
+const auth = useAuthStore()
+
 const show = ref(false)
+const errors = ref<string[]>([])
+
+async function onSubmit(values: any) {
+  try {
+    const response = await authService.signIn(values)
+
+    auth.access = response.access
+    auth.refresh = response.refresh
+
+    navigateTo('/')
+  } catch (error) {
+    errors.value = ['Usuario o contraseña incorrectos']
+  }
+}
 </script>
 
 <template>
@@ -16,7 +34,9 @@ const show = ref(false)
       <div class="card-body pb-0">
         <FormKit
           type="form"
+          :errors="errors"
           :actions="false"
+          @submit="onSubmit"
         >
           <div class="divider mb-2"></div>
 
@@ -41,7 +61,9 @@ const show = ref(false)
             @suffix-icon-click="() => (show = !show)"
           />
 
-          <div class="card-actions justify-end">
+          <FormKitMessages />
+
+          <div class="card-actions mt-5 justify-end">
             <FormKit
               type="submit"
               label="Iniciar Sesión"
