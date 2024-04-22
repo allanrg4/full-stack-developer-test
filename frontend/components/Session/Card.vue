@@ -6,7 +6,7 @@ type Props = {
   selected: boolean
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const props = defineProps<Props>()
   >
     <div class="card-body text-center">
       <span class="font-bold">
-        {{ props.item.name }}
+        {{ item.name }}
       </span>
 
       <span>
@@ -24,7 +24,7 @@ const props = defineProps<Props>()
       </span>
 
       <span>
-        {{ `Cupo: ${props.item.availability}` }}
+        {{ `Cupo: ${item.availability - item.assignments}` }}
       </span>
     </div>
   </div>
