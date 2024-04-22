@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { DateTime } from 'luxon'
-
 import type { Session } from '@/entities/Session'
 
 type Props = {
@@ -9,14 +7,6 @@ type Props = {
 }
 
 const props = defineProps<Props>()
-
-function getItemSchedule(item: Session) {
-  return `${formatTime(item.startDatetime)} a ${formatTime(item.endDatetime)}`
-}
-
-function formatTime(datetime: string) {
-  return DateTime.fromISO(datetime).setZone('America/Guatemala').setLocale('es').toFormat('HH:mm a')
-}
 </script>
 
 <template>
@@ -25,9 +15,17 @@ function formatTime(datetime: string) {
     :class="{ 'bg-cyan-100': selected, 'hover:bg-slate-200': !selected }"
   >
     <div class="card-body text-center">
-      <span>{{ props.item.name }}</span>
-      <span>{{ getItemSchedule(props.item) }}</span>
-      <span>{{ `Cupo: ${props.item.availability}` }}</span>
+      <span class="font-bold">
+        {{ props.item.name }}
+      </span>
+
+      <span>
+        {{ formatSchedule(item.startDatetime, item.endDatetime) }}
+      </span>
+
+      <span>
+        {{ `Cupo: ${props.item.availability}` }}
+      </span>
     </div>
   </div>
 </template>

@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-import { DateTime } from 'luxon'
-
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
 
 const model = defineModel()
 
-const now = DateTime.now().setZone('America/Guatemala').setLocale('es')
+const now = getNow()
 const currentWeek = ref(0)
 
 const currentWeekDays = computed(() => {
@@ -59,8 +57,12 @@ onBeforeMount(() => {
           @click="model = item.value"
         >
           <div class="card-body text-center capitalize">
-            <span>{{ item.day }}</span>
             <span>{{ item.weekDay }}</span>
+
+            <span class="font-bold">
+              {{ item.day }}
+            </span>
+
             <span>{{ item.month }}</span>
           </div>
         </div>

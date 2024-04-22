@@ -5,7 +5,7 @@ import * as service from '@/services/SessionService'
 
 const props = defineProps<{ date: string }>()
 
-const model = defineModel()
+const model = defineModel<Session>()
 
 const sessions = ref<Session[]>([])
 
@@ -13,6 +13,8 @@ watch(
   () => props.date,
   async (date) => {
     sessions.value = await service.all({ date })
+
+    model.value = undefined
   }
 )
 </script>
@@ -29,8 +31,8 @@ watch(
         v-for="(item, i) in sessions"
         :key="item.id"
         :item="item"
-        :selected="model === item.id"
-        @click="model = item.id"
+        :selected="model?.id === item.id"
+        @click="model = item"
       />
     </div>
 

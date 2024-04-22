@@ -20,9 +20,9 @@ definePageMeta({
       :date="date"
     />
 
-    <AssignForm
+    <FormAssign
       v-if="session"
-      :session="session"
+      :item="session"
     />
   </main>
 </template>

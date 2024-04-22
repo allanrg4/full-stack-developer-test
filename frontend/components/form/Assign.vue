@@ -2,10 +2,10 @@
 import type { Session } from '~/entities/Session'
 
 type Props = {
-  session: Session
+  item: Session
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const { students } = useForm()
 </script>
@@ -18,14 +18,14 @@ const { students } = useForm()
         :actions="false"
       >
         <h2 class="card-title mb-4">
-          {{ props.session.name }}
+          {{ item.name }}
         </h2>
 
         <div class="divider mb-2"></div>
 
-        <p>Fecha de Inicio: {{ session.startDatetime }}</p>
-        <p>Horario</p>
-        <p>Cupo</p>
+        <p>Fecha de Inicio: {{ formatDate(item.startDatetime) }}</p>
+        <p>Horario: {{ formatSchedule(item.startDatetime, item.endDatetime) }}</p>
+        <p>Cupo Disponible: {{ item.availability }}</p>
 
         <div class="mb-4"></div>
 
