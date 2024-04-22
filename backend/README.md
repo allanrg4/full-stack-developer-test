@@ -15,10 +15,10 @@ Crear un nuevo etorno virtual a elección con Python 3.10
 Para instalar las dependencias del proyecto, ejecutar el siguiente comando:
 
 ```bash
-pip install -r requirements.txt \
-&& python manage.py makemigrations && python manage.py migrate \
-&& python manage.py loaddata fixtures/users.json
-&& python manage.py loaddata fixtures/students.json
+pip install -r requirements.txt && \
+python manage.py makemigrations && python manage.py migrate && \
+python manage.py loaddata fixtures/users.json && \
+python manage.py loaddata fixtures/students.json
 ```
 
 ## Ejecución
