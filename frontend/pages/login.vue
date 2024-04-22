@@ -48,6 +48,7 @@ async function onSubmit(values: any) {
             label="Usuario"
             placeholder="Ingrese su nombre de usuario"
             validation="required"
+            :validation-messages="{ required: 'Este campo es requerido.' }"
           />
 
           <FormKit
@@ -56,6 +57,7 @@ async function onSubmit(values: any) {
             label="Contraseña"
             placeholder="Ingrese su contraseña"
             validation="required"
+            :validation-messages="{ required: 'Este campo es requerido.' }"
             :suffix-icon="show ? 'eye' : 'eyeClosed'"
             suffix-icon-class="hover:text-blue-500"
             @suffix-icon-click="() => (show = !show)"

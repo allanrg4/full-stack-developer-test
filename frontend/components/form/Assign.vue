@@ -13,7 +13,12 @@ const values = ref<any>({ session: props.item.id })
 
 watch(
   () => props.item,
-  (item) => (values.value.session = item.id)
+  (item) => {
+    values.value = {
+      session: item.id,
+      student: undefined,
+    }
+  }
 )
 
 async function onSubmit(values: any) {
@@ -53,6 +58,7 @@ async function onSubmit(values: any) {
       <div class="mb-1"></div>
 
       <FormKit
+        v-if="item.availability > item.assignments"
         type="form"
         v-model="values"
         :actions="false"
@@ -70,6 +76,7 @@ async function onSubmit(values: any) {
           placeholder="Ingrese el estudiante ha asignar"
           :options="students"
           validation="required"
+          :validation-messages="{ required: 'Este campo es requerido.' }"
         />
 
         <FormKitMessages />
@@ -80,12 +87,11 @@ async function onSubmit(values: any) {
             label="Asignar"
             suffix-icon="submit"
             class="btn btn-primary"
-            outer-classes="bg-red"
           />
         </div>
       </FormKit>
 
-      <!-- <p v-else>No hay cupo disponible para esta sesión.</p> -->
+      <p v-else>No hay cupo disponible para esta sesión.</p>
     </div>
   </div>
 </template>
