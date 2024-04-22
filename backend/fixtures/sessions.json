@@ -1,0 +1,25 @@
+{
+   "sessions":{
+      "Fisica I":[
+         {
+            "start_datetime":"16/04/2024 8:00",
+            "end_datetime":"16/04/2024 10:00",
+            "availability":10
+         }
+      ],
+      "Electronica IV":[
+         {
+            "start_datetime":"16/04/2024 18:00",
+            "end_datetime":"16/04/2024 19:00",
+            "availability":20
+         }
+      ],
+      "Matematica III":[
+         {
+            "start_datetime":"16/04/2024 11:00",
+            "end_datetime":"16/04/2024 13:00",
+            "availability":15
+         }
+      ]
+   }
+}
