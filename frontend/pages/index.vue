@@ -5,7 +5,7 @@ import * as service from '@/services/StudentService'
 
 const students = ref<Student[]>([])
 
-const day = ref<number>()
+const selectedDay = ref<string>()
 const session = ref<number>()
 
 const choices = computed(() =>
@@ -26,29 +26,16 @@ definePageMeta({
 </script>
 
 <template>
+  <!-- Render the days of the current week -->
   <main class="container mx-auto mt-4">
     <div class="mb-10">
       <p class="mb-4 text-xl font-bold">Calendario</p>
 
-      <div class="grid grid-cols-5 gap-5">
-        <div
-          v-for="i in 5"
-          :key="i"
-          class="card cursor-pointer border-2"
-          :class="{ 'bg-cyan-100': day === i, 'hover:bg-slate-200': day !== i }"
-          @click="day = i"
-        >
-          <div class="card-body text-center">
-            <span>Martes</span>
-            <span>16</span>
-            <span>Abril</span>
-          </div>
-        </div>
-      </div>
+      <WeeklyCalendar v-model="selectedDay" />
     </div>
 
     <div
-      v-if="day"
+      v-if="selectedDay"
       class="mb-10"
     >
       <p class="mb-4 text-xl font-bold">Sesiones Disponibles</p>
