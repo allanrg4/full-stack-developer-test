@@ -36,35 +36,42 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="flex items-center gap-4">
-    <button
-      class="btn btn-ghost"
-      @click="() => currentWeek--"
-    >
-      <ChevronLeftIcon class="h-5 w-5" />
-    </button>
+  <div>
+    <p class="mb-2 text-xl font-bold">Calendario</p>
 
-    <div class="grid flex-1 grid-cols-7 gap-4">
-      <div
-        v-for="(item, i) in currentWeekDays"
-        :key="i"
-        class="card cursor-pointer border-2"
-        :class="{ 'bg-cyan-100': model === item.value, 'hover:bg-slate-200': model !== item.value }"
-        @click="model = item.value"
+    <div class="flex items-center gap-4">
+      <button
+        class="btn btn-ghost"
+        @click="() => currentWeek--"
       >
-        <div class="card-body text-center capitalize">
-          <span>{{ item.day }}</span>
-          <span>{{ item.weekDay }}</span>
-          <span>{{ item.month }}</span>
+        <ChevronLeftIcon class="h-5 w-5" />
+      </button>
+
+      <div class="grid flex-1 grid-cols-7 gap-4">
+        <div
+          v-for="(item, i) in currentWeekDays"
+          :key="i"
+          class="card cursor-pointer border-2"
+          :class="{
+            'bg-cyan-100': model === item.value,
+            'hover:bg-slate-200': model !== item.value,
+          }"
+          @click="model = item.value"
+        >
+          <div class="card-body text-center capitalize">
+            <span>{{ item.day }}</span>
+            <span>{{ item.weekDay }}</span>
+            <span>{{ item.month }}</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <button
-      class="btn btn-ghost"
-      @click="() => currentWeek++"
-    >
-      <ChevronRightIcon class="h-5 w-5" />
-    </button>
+      <button
+        class="btn btn-ghost"
+        @click="() => currentWeek++"
+      >
+        <ChevronRightIcon class="h-5 w-5" />
+      </button>
+    </div>
   </div>
 </template>

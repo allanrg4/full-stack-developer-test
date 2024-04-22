@@ -1,23 +1,8 @@
 <script lang="ts" setup>
-import type { Student } from '@/entities/Student'
+import type { Session } from '~/entities/Session'
 
-import * as service from '@/services/StudentService'
-
-const students = ref<Student[]>([])
-
-const selectedDay = ref<string>()
-const session = ref<number>()
-
-const choices = computed(() =>
-  students.value.map((i) => ({
-    label: `${i.firstName} ${i.lastName}`,
-    value: i.id,
-  }))
-)
-
-onBeforeMount(async () => {
-  students.value = await service.all()
-})
+const date = ref<string>()
+const session = ref<Session>()
 
 definePageMeta({
   middleware: 'auth',
@@ -26,77 +11,18 @@ definePageMeta({
 </script>
 
 <template>
-  <!-- Render the days of the current week -->
-  <main class="container mx-auto mt-4">
-    <div class="mb-10">
-      <p class="mb-4 text-xl font-bold">Calendario</p>
+  <main class="container mx-auto mt-4 flex flex-col gap-10">
+    <WeeklyCalendar v-model="date" />
 
-      <WeeklyCalendar v-model="selectedDay" />
-    </div>
+    <SessionRow
+      v-if="date"
+      v-model="session"
+      :date="date"
+    />
 
-    <div
-      v-if="selectedDay"
-      class="mb-10"
-    >
-      <p class="mb-4 text-xl font-bold">Sesiones Disponibles</p>
-
-      <div class="grid grid-cols-5 gap-5">
-        <div
-          v-for="i in 5"
-          :key="i"
-          class="card cursor-pointer border-2"
-          :class="{ 'bg-cyan-100': session === i, 'hover:bg-slate-200': session !== i }"
-          @click="session = i"
-        >
-          <div class="card-body text-center">
-            <span>Física 1</span>
-            <span>8:10 am a 1:00 pm</span>
-            <span>Cupo 10</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="session">
-      <div class="card w-1/2 border-2">
-        <div class="card-body pb-0">
-          <FormKit
-            type="form"
-            :actions="false"
-          >
-            <h2 class="card-title mb-4">Curso: Física I</h2>
-
-            <div class="divider mb-2"></div>
-
-            <p>Fecha de Inicio</p>
-            <p>Horario</p>
-            <p>Cupo</p>
-
-            <div class="mb-4"></div>
-
-            <FormKit
-              type="select"
-              name="student"
-              label="Asignar Estudiante"
-              placeholder="Ingrese el estudiante ha asignar"
-              :options="choices"
-              validation="required"
-            />
-
-            <FormKitMessages />
-
-            <div class="card-actions mt-5 justify-end">
-              <FormKit
-                type="submit"
-                label="Asignar"
-                suffix-icon="submit"
-                class="btn btn-primary"
-                outer-classes="bg-red"
-              />
-            </div>
-          </FormKit>
-        </div>
-      </div>
-    </div>
+    <AssignForm
+      v-if="session"
+      :session="session"
+    />
   </main>
 </template>
